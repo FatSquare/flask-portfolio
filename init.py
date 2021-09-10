@@ -17,7 +17,7 @@ app.config['MYSQL_DB'] = private.sql_dbname
 mysql = MySQL(app)
 
 def GetViews():
-    query = "select count(*) from wiki"
+    query = f"select count(*) from {private.sql_columnname}"
     cur = mysql.connection.cursor()
     cur.execute(query)
     mysql.connection.commit()
@@ -29,7 +29,7 @@ def AddView(ipaddr):
     
     cur = mysql.connection.cursor()
     try: 
-        cur.execute("INSERT INTO wiki(viewer) VALUES(%s)",[private.hideIP(ipaddr)])
+        cur.execute("INSERT INTO {private.sql_columnname} (viewer) VALUES(%s)",[private.hideIP(ipaddr)])
         mysql.connection.commit()
     except Exception as ex:
         print(ex)
