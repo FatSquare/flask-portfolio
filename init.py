@@ -1,10 +1,8 @@
 from flask import Flask,redirect,render_template,request,url_for
 from colorama import Fore
-import flaskpdf
 port = 5000
 
 app = Flask(__name__)
-flaskpdf.init_app(app)
 
 @app.route('/')
 def Home():
