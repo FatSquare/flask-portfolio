@@ -1,41 +1,40 @@
 from flask import Flask,render_template,request
-from flask_mysqldb import MySQL
-import logging,private
+#from flask_mysqldb import MySQL
+#import private
 from colorama import Fore
 
 port = 5000
 
-log = logging.getLogger('werkzeug')
-log.setLevel(logging.ERROR)
-
 app = Flask(__name__)
-app.config['MYSQL_HOST'] = private.sql_host
-app.config['MYSQL_USER'] = private.sql_username
-app.config['MYSQL_PASSWORD'] = private.sql_password
-app.config['MYSQL_DB'] = private.sql_dbname
+#app.config['MYSQL_HOST'] = private.sql_host
+#app.config['MYSQL_USER'] = private.sql_username
+#app.config['MYSQL_PASSWORD'] = private.sql_password
+#app.config['MYSQL_DB'] = private.sql_dbname
 
-mysql = MySQL(app)
+###mysql = MySQL(app)
 
 def GetViews():
-    query = f"select count(*) from {private.sql_tablename}"
-    cur = mysql.connection.cursor()
-    cur.execute(query)
-    mysql.connection.commit()
-    data = cur.fetchall()
-    cur.close()
-    return data[0][0]
+    return 0
+#    query = f"select count(*) from {private.sql_tablename}"
+#    cur = mysql.connection.cursor()
+#    cur.execute(query)
+#    mysql.connection.commit()
+#    data = cur.fetchall()
+#    cur.close()
+#    return data[0][0]
+#
 
 def AddView(ipaddr):
-    
-    cur = mysql.connection.cursor()
-    try: 
-        cur.execute(f"INSERT INTO {private.sql_tablename} ({private.sql_columnname}) VALUES(%s)",[private.hideIP(ipaddr)])
-        mysql.connection.commit()
-    except Exception as ex:
-        print(ex)
-        pass
-    cur.close()
-    print(Fore.GREEN + f"Incoming connection from: {ipaddr}" +Fore.WHITE)
+    return 0
+    #cur = mysql.connection.cursor()
+    #try: 
+    #    cur.execute(f"INSERT INTO {private.sql_tablename} ({private.sql_columnname}) VALUES(%s)",[private.hideIP(ipaddr)])
+    #    mysql.connection.commit()
+    #except Exception as ex:
+    #    print(ex)
+    #    pass
+    #cur.close()
+    #print(Fore.GREEN + f"Incoming connection from: {ipaddr}" +Fore.WHITE)
 
 @app.route('/')
 def Home():
@@ -72,13 +71,13 @@ def GetFlag():
     return 'U3F1YXIze1doNHRfNF9XMzFyZDB9'
 
 
-for i in (404,500,403):
+for i in (500,404,403):
     @app.errorhandler(i)
     def PageNotFound404(er):
         ercode = str(er)[0:3]
         return render_template('error.html',errorCode=ercode)
 
-if __name__ == "__main__" and True: # Change True to False if you don't want to run the script by default
+if __name__ == "__main__" and False: # Change True to False if you don't want to run the script by default
     print(Fore.YELLOW + f"Website started on port {port}\n" +Fore.WHITE)
     app.run(debug=True,port=port)
     
