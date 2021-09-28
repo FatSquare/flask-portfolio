@@ -1,35 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  </head>
+{% extends 'base.html' %}
 
-  <body>
-    <input type="checkbox" id="active" />
-    <label for="active" class="menu-btn"><span></span></label>
-    <label for="active" class="close"></label>
-     <div class="wrapper">
-    <ul>
-        <li><a href="/">WhoAmI</a></li>
-        <li><a href="/certificates/">Certeficates</a></li>
-        <li><a href="/contact/">Contact</a></li>
-        <li><a href="/hack/">H4CK{}</a></li>
-      </ul>
-    </div>
-    <div class="content">
-      <div class="title">
-        [root@squar3]$ cat /etc/passwd
-      </div>
-      <p>
-        root:818f804a2c24e89082a37d1486ac45b83f9452ea9b953678c7e115f354f96463<br>
-        sha256 is secure <a onclick="alert('or not??')" class="HoverCursor">🤫</a><br>
-      </p>
-    </div>
-    <div class="views">
-      <p><i class="far fa-eye"></i> {{ views }}</p>
-    </div>
-  </body>
-</html>
+{% block content %}
+<div class="content">
+  <div class="title">
+    [root@squar3]$ cat /etc/passwd
+  </div>
+  <p>
+    root:818f804a2c24e89082a37d1486ac45b83f9452ea9b953678c7e115f354f96463<br>
+    sha256 is secure <a onclick="alert('or not??')" class="HoverCursor">🤫</a><br>
+  </p>
+</div>
+{% endblock %}

@@ -1,46 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-  </head>
-
-  <body>
-    <input type="checkbox" id="active" />
-    <label for="active" class="menu-btn"><span></span></label>
-    <label for="active" class="close"></label>
-     <div class="wrapper">
-    <ul>
-        <li><a href="/">WhoAmI</a></li>
-        <li><a href="/certificates/">Certeficates</a></li>
-        <li><a href="/contact/">Contact</a></li>
-        <li><a href="/hack/">H4CK{}</a></li>
-      </ul>
-    </div>
-    <div class="content">
-      <div class="title" style="margin-top: 10%;">
-        Who Am I ?
-      </div>
-      <p>
-        Hello I am Squar3, A cyber security student<br>
-        I like to make webapps and play ctfs.
-      </p>
-      <br>
-      <div class="title">
-        Experiences
-      </div>
-      <p class="cleft">
-        - Web developer (html, css, js, php, sql, python)<br>
-        - Pentester (AppSec)<br>
-        - Game developer (Unity,C#)<br>
-        - Software developer (C#,python) <br>
-        - CTF player
-      </p>
-    </div>
-    <div class="views">
-      <p><i class="far fa-eye"></i> {{ views }}</p>
-    </div>
-  </body>
-</html>
+{% extends 'base.html' %}
+{% block content%}
+<div class="content">
+  <div class="title" style="margin-top: 10%;">
+    Who Am I ?
+  </div>
+  <p>
+    Hello I am Squar3, A cyber security student<br>
+    I like to make webapps and play ctfs.
+  </p>
+  <br>
+  <div class="title">
+    Experiences
+  </div>
+  <p class="cleft">
+    - Web developer (html, css, js, php, sql, python)<br>
+    - Pentester (AppSec)<br>
+    - Game developer (Unity,C#)<br>
+    - Software developer <br>
+    - CTF player
+  </p>
+</div>
+{% endblock %}
