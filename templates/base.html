@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="{{ url_for('static',filename='main.css') }}">
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
     <title>Squar3</title>
-    </head>
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  </head>
   <body>
     <input type="checkbox" id="active" />
     <label for="active" class="menu-btn"><span></span></label>
@@ -15,10 +15,11 @@
     <div class="wrapper">
     <ul>
         <li><a href="/">WhoAmI</a></li>
+        <li><a href="/writeups/">Writeups</li>
         <li><a href="/certificates/">Certeficates</a></li>
         <li><a href="/contact/">Contact</a></li>
         <li><a href="/hack/">H4CK{}</a></li>
-      </ul>
+    </ul>
     </div>
 
 {% block content %}{% endblock %}

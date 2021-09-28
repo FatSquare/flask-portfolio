@@ -8,9 +8,21 @@ app = Flask(__name__)
 def Home():
     return render_template('index.html')
 
+@app.route('/writeups/')
+def writeups():
+    return render_template('writeups.html')
+
 @app.route('/certificates/')
 def Certs():
     return render_template('certs.html')
+
+@app.route('/writeups/<ctf>/')
+def ShowWriteup(ctf):
+    if ctf == 'securinetsfriendly21':
+        return render_template('ctfs/securinetsfriendly21.html')
+    else:
+        return redirect('/writeups/')
+
 
 @app.route('/certificates/<certname>')
 def ShowCert(certname):
