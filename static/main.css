@@ -230,8 +230,39 @@ a:hover {
 }
 .task{
     color: rgb(194, 48, 104);
+font-size: 26px;
+
+
 }
 .title2 {
     color: rgb(21, 187, 21);
     font-size: 30px;
 }
+.code {
+    background-color: rgb(240, 240, 240);
+    padding: 6px;
+    border-radius: 10px;
+    color: black;
+    font-size: 15px;
+    font-family: 'Space Mono', monospace;
+    max-width: 90%;
+
+}
+
+
+html {
+    scroll-behavior: smooth;
+}
+
+
+.endline {
+    background-color: rgba(71, 255, 111, 0.801);
+    text-align: center;
+    width: 90%;
+    height: 40px;
+    margin-top: 70px;
+    margin-bottom: 70px;
+    border-radius: 10%;
+}
+
+
