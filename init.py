@@ -28,6 +28,8 @@ def ShowWriteup(ctf):
 def ShowCert(certname):
     if certname == "jusoor":
         return  redirect(url_for('static',filename='certs/Ayoub-Hedri-certificate.pdf'))
+    elif certname == "codingame-python3":
+        return  redirect(url_for('static',filename='certs/Ayoub-Hedri-python3-codingame.pdf'))
     return 'Invalid certificate name!'
 
 @app.route('/contact/')
