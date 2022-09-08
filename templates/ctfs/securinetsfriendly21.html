@@ -46,7 +46,7 @@
       <img src=https://i.imgur.com/5MATsUZ.png" width="520px" style="max-width: 90%;"><br><br>
       And as i said they are not using === so php won't check if the string content is the same and they both string.<br>
       PHP will just check if the value somehow the same
-      and just by sendthe unhashed string to the magic a parameter we should get the flag<br>
+      and just by sending the unhashed string to the magic a parameter we should get the flag<br>
       <a href="http://40.114.76.220:84/?magic=240610708" target="_blank">http://40.114.76.220:84/?magic=240610708</a>
       <div class="endline">Securinets{I_REALLY_L3VE_PhP_<3}</div>
       
@@ -65,7 +65,7 @@
       They both javascript files and do the same job<br>
       but one is understandable by human and one is not<br>
       And to convert an Obfuscated JS to human-readable JS<br>
-      you need to use tools that trie to help you<br><br>
+      you need to use some tools to help you Deobfuscating the code <br><br>
       links : <a href="https://lelinhtinh.github.io/de4js/" target="_blank">de4js</a><br>
       After putting the source <a href="https://paste.myst.rs/gm2zm0w1">Source code</a> there you should find the flag<br><br>
       <img src="https://i.imgur.com/Vv9HvsM.png" width="520px" style="max-width: 90%;"><br><br>
@@ -119,13 +119,13 @@
 		      &nbsp;&nbsp;&nbsp;die('"admin" detected .. what are u doing here Hacker ?!');<br>
 	        }
       </div><br>
-      Off.. an <a href="https://www.php.net/manual/en/function.preg-match.php" target="_blank">preg match</a> to check if we have the word "admin" in our input.<br>
+      Ehh.. a <a href="https://www.php.net/manual/en/function.preg-match.php" target="_blank">preg match</a> to check if we have the word "admin" in our input.<br>
       oh nvm i remember a function called <a href='https://www.w3schools.com/SQL/func_sqlserver_concat.asp' target='_blank'>CONCAT</a> in SQL that takes two strings and connect them together<br>
       so instead of typing the word admin we can just type CONCAT('ad','min')<br>
       lets try our payload again but this time replacing admin with CONCAT('ad','min')<br><br>
       <div class="code">Username : ' UNION SELECT CONCAT('adm','in');#<br>Password : x</div><br><br>
       <img src=https://i.imgur.com/5Dfw4tC.png" width="520px" style="max-width: 90%;"><br><br>
-      WOW, to be honest I didn't expect it to work from the first try xD<br>
+      WOW, to be honest I didn't expect it to work from the first try <br>
       <div class="endline">Securinets{SQLi_have_no_LIMIT!!!}</div>
 
       <!-- EVAL -->
@@ -133,9 +133,9 @@
       <b>NOTE : THE FLAG IN <f style="color: purple;">/flag.txt</f></b><br>
       Lets check the the <a href="http://40.114.76.220:8089/" target="_blank">task</a> really quick<br><br>
       <img src="https://i.imgur.com/zm9Old1.png" width="360px" style="max-width: 90%;"><br><br>
-      Hmm. its just a normal calculator isn't it ??<br>
+      Hmm. its just a normal calculator, isn't it ??<br>
       Just looking at the task name we know that the task is talking about the <a href='https://www.php.net/manual/en/function.eval.php' target="_blank">EVAL function</a><br><br>
-      PLEASE DO NOT USE EVAL. it is very dangerous.. I don't know if thats scary enought but we will see what we can do with it<br><br>
+      PLEASE DO NOT USE EVAL. it is very dangerous.. I don't know if that's scary enought but we will see what we can do with it<br><br>
       <img src=https://i.imgur.com/bWNfhz9.png" width="740px" style="max-width: 90%;"><br><br>
       Let's open the task with <a href="https://portswigger.net/burp" target="_blank">burpsuite</a> so we can see what is exactly going on <i>(You don't need to)</i><br>
       i tried calculating 6-3 and it looks like the page send POST Request to the eval.php and then execute the eval function on the server<br><br>
@@ -155,11 +155,11 @@
       <a href="http://40.114.76.220:8090/index.php">LINK</a><br>
       NOTE : The flag is in the root directory /flag.txt<br><br>
       <img src=https://i.imgur.com/CJ0XCwS.png" width="520px" style="max-width: 90%;"><br><br>
-      Looks like we have an CURL service that will send an curl request to any service we provide<br>
+      Looks like we have a CURL service that will send a curl request to any service we provide<br>
       Let's just start with <a href="http://amazon.com" target="_blank">amazon.com</a><br><br>
       <div class="code">http://amazon.com</div><br>
       <img src="https://i.imgur.com/3KO3V5Y.png" width="520px" style="max-width: 90%;"><br><br>
-      I first tried accesing the root directory like that, then i got an 404 STATUS and rememberd that this is not how we access the root directory<br><br>
+      I first tried accesing the root directory like that, then i got a 404 ERROR and rememberd that this is not how we access the root directory<br><br>
       <div class="code">http://40.114.76.220:8090/../../../flag.txt</div><br>
       So i tried changing the <a href="https://en.wikipedia.org/wiki/List_of_URI_schemes" target="_blank">url scheme</a> from <a href="https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol" target="_blank">HTTP</a> to <a href="https://en.wikipedia.org/wiki/File_URI_scheme" target="_blank">FILE</a><br><br>
       <div class="code">file://flag.txt</div><br>
@@ -177,7 +177,7 @@
         <img src="https://i.imgur.com/wIdStCh.png" width="500px" style="max-width: 90%;"><br><br>
         We have an input with submit button let's type something and click it to see what will happen<br><br>
         <img src="https://i.imgur.com/eVPKt3C.png" width="500px" style="max-width: 90%;"><br><br>
-        It takes me to the same page but with parameter <x style="color: red;">?name=</x>  (the text i chosed) and desplaying it under the input field. <br>
+        It takes me to the same page but with parameter <x style="color: red;">?name=</x>  (the text i chose) and desplaying it under the input field. <br>
         Changing the parameter value on the url and pressing enter will change the content of the page!<br>
         Now let's see if they are using any filtering system to clear the paramater <x style="color: red;">?name=</x> from <x style="color: yellow;">javascript/xss</x> before rendering it.<br>
         I changed the url from 
